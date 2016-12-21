@@ -6,13 +6,13 @@ Dir.glob("**/*.xlsx") do |file|
   bookname = xlsx.column(1)
 
   xlsx.column(3).each do |cl|
-  	if (cl != "Verse")
-  		directory_name = bookname[1]
-  	  Dir.mkdir(directory_name) unless File.exists?(directory_name)
+    if (cl != "Verse")
+      directory_name = bookname[1]
+      Dir.mkdir(directory_name) unless File.exists?(directory_name)
       if cl[0]
-  	   output_name = "#{directory_name}/#{File.basename(cl[0], '.*')}.md"
+        output_name = "#{directory_name}/#{File.basename(cl[0], '.*')}.md"
       end
-			output = File.open(output_name, 'w')
+      output = File.open(output_name, 'w')
 
       tn = xlsx.column(5)
       tn_data = tn[1]
@@ -25,15 +25,16 @@ Dir.glob("**/*.xlsx") do |file|
       loop do
         begin
           final_data = iterate_split_bullet.next
-          before_hyphan = final_data.partition('-').first.partition('•').last
-          after_hyphan  = final_data.partition('-').last
+          before_hyphan = final_data.partition('-').first.partition('•').last # It will show only string which is before hyphan
+          after_hyphan  = final_data.partition('-').last # It will show only string which is after hyphan
+          
           output << "#"+"#{before_hyphan}\n\n"
           output << "#{after_hyphan} \n"
         rescue StopIteration
           break
         end
       end
-			output.close
-  	end
+      output.close
+    end
   end
 end
