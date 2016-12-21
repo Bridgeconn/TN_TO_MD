@@ -25,9 +25,9 @@ Dir.glob("**/*.xlsx") do |file|
       loop do
         begin
           final_data = iterate_split_bullet.next
-          before_hyphan = final_data.partition('-').first.partition('•').last # It will show only string which is before hyphan
-          after_hyphan  = final_data.partition('-').last # It will show only string which is after hyphan
-          
+          before_hyphan = final_data.partition('-').first.partition('•').last # It will show only string which is before hyphan.
+          after_hyphan  = final_data.partition('-').last # It will show only string which is after hyphan.
+          # Need to add here logic so that obly require varse should go in file. 
           output << "#"+"#{before_hyphan}\n\n"
           output << "#{after_hyphan} \n"
         rescue StopIteration
